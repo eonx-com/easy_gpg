@@ -158,3 +158,31 @@ class EncryptionClient:
 
         # Return the unencrypted message
         return pgp_message_unencrypted.message
+
+    # Decrypt the supplied cipher text (or encrypted PHP message)
+    def verify(self, cipher_text, decryption_key_name, signing_key_name):
+        # Retrieve the required keys from storage
+        private_key = self.keys[decryption_key_name]
+        public_key = self.keys[signing_key_name]
+
+        # The encryption library will generate a warning about the key being used not being able to encrypt/decrypt
+        # a message, and that it will try (and succeed) to use a sub-key. To prevent this flooding CloudWatch
+        # unnecessarily, we will suppress this specific warning
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            # Create a PGP message from the cipher text
+            pgp_message_encrypted = pgpy.PGPMessage.from_blob(str(cipher_text))
+
+            signature = public_key.verify(pgp_message_encrypted)
+
+            # If we did receive a warning ensure it is only the one about using the the sub-key
+            if -1 in w:
+                if issubclass(w[-1].category, UserWarning):
+                    assert 'Message was encrypted with this key\'s subkey' in str(w[-1].message)
+                    assert 'Decrypting with that' in str(w[-1].message)
+
+            # Turn warnings back on
+            warnings.simplefilter('default')
+
+        # Return the unencrypted message
+        return signature
