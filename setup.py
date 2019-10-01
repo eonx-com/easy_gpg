@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='EasyGpg',
-    version='0.0.1',
+    version='2.0.0',
     description='Python service to GPG encrypt files',
     url='git@github.com:loyaltycorp/EasyGpg',
     author='Damian Sloane',
