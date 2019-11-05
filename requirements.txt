@@ -1,0 +1,2 @@
+paramiko
+PGPy==0.5.2

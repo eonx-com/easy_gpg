@@ -6,7 +6,7 @@ setup(
     description='Python service to GPG encrypt files',
     url='git@github.com:loyaltycorp/EasyGpg',
     author='Damian Sloane',
-    author_email='damian.sloane@loyaltycorp.com.au',
+    author_email='damian.sloane@eonx.com',
     license='proprietary',
     packages=['EasyGpg'],
     zip_safe=False,

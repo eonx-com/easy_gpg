@@ -87,7 +87,7 @@ class GpgClient:
             plain_text,
             signing_key,
             compression=pgpy.constants.CompressionAlgorithm.Uncompressed,
-            encoding='ascii'
+            encoding=None
     ):
         self.log_trace('Signing message...')
         # Retrieve the public key from storage
@@ -132,7 +132,7 @@ class GpgClient:
             signing_key,
             compression=pgpy.constants.CompressionAlgorithm.Uncompressed,
             cipher=pgpy.constants.SymmetricKeyAlgorithm.AES256,
-            encoding='ascii'
+            encoding=None
     ):
         self.log_trace('Signing and encrypting message...')
 
