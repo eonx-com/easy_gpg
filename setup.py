@@ -4,7 +4,7 @@ setup(
     name='EasyGpg',
     version='2.0.0',
     description='Python service to GPG encrypt files',
-    url='git@github.com:loyaltycorp/EasyGpg',
+    url='git@github.com:eonx-com/EasyGpg',
     author='Damian Sloane',
     author_email='damian.sloane@eonx.com',
     license='proprietary',
